@@ -1,0 +1,71 @@
+/*更新element style*/
+.el-message-box {
+  border: 1px solid #a7a7a7;
+  padding-bottom: 0;
+  border-radius: 0;
+}
+.el-message-box__header {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  padding: 0;
+}
+.el-message-box__header .el-message-box__title {
+  flex: 1;
+  padding-left: 10px;
+  font-size: 14px;
+}
+
+.el-message-box__header .el-message-box__headerbtn {
+  position: static;
+}
+.el-message-box__headerbtn .el-message-box__close {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+}
+.el-message-box__close:hover {
+  color: #ffffff !important;
+}
+.el-message-box__headerbtn:hover {
+  background: #ff0000;
+}
+.el-message-box__content {
+  background: #f7f7f7;
+}
+.el-message-box .el-message-box__btns {
+  padding-bottom: 10px;
+  background: #f7f7f7;
+}
+.el-message-box .el-message-box__btns .el-button--primary,
+.el-message-box .el-message-box__btns .el-button--default {
+  width: 80px;
+  height: 22px;
+  padding: 0;
+  border: 1px solid #a7a7a7;
+  border-radius: 0;
+  color: #333333;
+  background: #ffffff;
+}
+.el-message-box .el-message-box__btns .el-button--primary:hover,
+.el-message-box .el-message-box__btns .el-button--default:hover {
+  background: #f1f1f1;
+}
+.v-modal {
+  background: none;
+}
+
+/*el-message*/
+.el-message {
+  /*border: 1px solid #A7A7A7;*/
+  background: #ffffff;
+  border-radius: 0;
+}
+.el-message .el-message__content {
+  color: #333333;
+}
+
+.ql-editor {
+  font-size: 16px;
+  color: black;
+}
