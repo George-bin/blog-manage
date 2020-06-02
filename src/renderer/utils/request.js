@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { Message } from 'element-ui'
 import router from '../router'
+import store from '../store'
 
 // 创建axios实例
 export let request = axios.create({
@@ -67,6 +68,7 @@ request.interceptors.response.use(
       message: '服务错误!',
       type: 'error'
     })
+    store.commit('SET_IS_Login', false)
     router.push('/login')
     return Promise.reject(error)
   }

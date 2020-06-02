@@ -430,12 +430,14 @@ export default {
     }
     .w-e-text code {
       width: calc(100vw - 220px - 240px - 25px - 14px) !important;
-      padding: 5px;
       max-height: 340px;
+      padding: 5px;
+      border: 1px solid #dfdfdf;
       margin: 0;
       font-size: 14px;
       overflow: auto;
       border-radius: 0;
+      background: #f8f8f8;
     }
     .w-e-text img {
       max-width: 500px;
