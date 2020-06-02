@@ -165,6 +165,7 @@ export default {
 .note-right-menu-component {
   position: fixed;
   z-index: 999;
+  // box-shadow: 0 0 5px #dfdfdf;
   .right-key-menu {
     width: 180px;
     padding: 0 10px 0 20px;
@@ -175,6 +176,9 @@ export default {
       height: 28px;
       line-height: 28px;
       font-size: 12px;
+      &:hover {
+        cursor: pointer;
+      }
     }
     li + li {
       border-top: 1px solid #dfdfdf;

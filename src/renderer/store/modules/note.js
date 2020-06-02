@@ -99,7 +99,6 @@ const note = {
                 notebookId: notebookId,
                 type: 'addNote'
               })
-              note.content = note.content.replace(/src="\/file\/uploads\/images\/blog/g, 'src="http://39.105.55.137/file/uploads/images/blog')
               commit('SET_ACTIVE_NOTE', note)
             }
             resolve(res.data)

@@ -5,10 +5,12 @@
       <template v-if="isLogin">
         <li
           class="setup-list__item"
-          @click="handleLogon">
+          @click="handleClickLogon">
           退出登录
         </li>
-        <li class="setup-list__item">
+        <li
+          class="setup-list__item"
+          @click="handleClickGoUpdateUser">
           账户设置
         </li>
       </template>
@@ -53,7 +55,7 @@ export default {
     init () {},
 
     // 注销
-    handleLogon () {
+    handleClickLogon () {
       this.$confirm('确定退出登录吗?', '提示', {
         type: 'warning'
       })
@@ -77,6 +79,10 @@ export default {
         .catch(() => {})
     },
 
+    handleClickGoUpdateUser () {
+      this.$router.push('/updateUser')
+    },
+
     // 网络设置
     handleClickStartSetNetwork () {
       console.log('打开网络设置!')
@@ -93,20 +99,21 @@ export default {
     position: fixed;
     right: 42px;
     top: 26px;
-    border: 1px solid #7d7d7d;
+    // border: 1px solid #a7a7a7;
     z-index: 9999;
-    background: #ffffff;
+    box-shadow: 0 0 5px #dfdfdf;
     .setup-list__item {
       height: 24px;
       line-height: 24px;
       padding: 0 20px;
       cursor: pointer;
+      background: #ffffff;
     }
     .setup-list__item:hover {
       background: #dfdfdf;
     }
     .setup-list__item + .setup-list__item {
-      border-top: 1px solid #7d7d7d;
+      border-top: 1px solid #dfdfdf;
     }
   }
 }

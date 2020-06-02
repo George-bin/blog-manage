@@ -21,9 +21,9 @@
     <div
       v-if="filterNoteList.length"
       :style="{
-        height: isMac ? 'calc(100vh - 60px)' : 'calc(100vh - 88px)'
+        height: isMac ? 'calc(100vh - 65px)' : 'calc(100vh - 93px)'
       }"
-      class="note-list">
+      class="note-list main-scrollbar">
       <div
         v-for="item in filterNoteList"
         :key="item._id"
@@ -41,12 +41,12 @@
                 }"
                 class="icon">
                 <i v-if="item.type === 'draft'" class="iconfont icon-biji"></i>
-                <i v-else class="el-icon-tickets" style="margin-top: 2px"></i>
+                <i v-else class="el-icon-tickets"></i>
               </span>
               <p class="note-title ellipsis">{{ item.title ? item.title : '无标题文档' }}</p>
             </div>
             <p class="time">
-              <span class="note-createTime">{{ $moment(item.createTime).format('YYYY-MM-DD HH:mm') }}</span>
+              <span class="note-createTime">{{ $moment(item.createTime).format('YYYY/MM/DD HH:mm') }}</span>
               <button class="introduction-btn" @click.stop="handleClickUpdateIntroduction(item)">简介</button>
             </p>
           </div>
@@ -59,7 +59,7 @@
     </div>
     <p v-else class="no-note-tip">暂无任何笔记!</p>
     <!-- 分页 -->
-    <div class="paging-section"></div>
+    <!-- <div class="paging-section"></div> -->
     <!-- 添加笔记简介 -->
     <note-introduction ref="noteIntroduction"></note-introduction>
   </div>
@@ -171,31 +171,37 @@ export default {
     }
   }
   .note-list {
-    // height: calc(100vh - 60px) !important;
-    padding-bottom: 5px;
+    // padding-bottom: 5px;
+    padding: 5px 5px 5px 2px;
     overflow: auto;
     .note-list__item {
+      border: 1px solid #ffffff;
       border-bottom: 1px solid #f1f1f1;
-      padding: 6px 10px;
+      padding: 4px;
       cursor: pointer;
       &:hover {
-        background: rgba(37, 215, 255, 0.2);
+        border: 1px solid #74e6ff;
+        background: rgba(26, 152, 180, 0.1);
       }
       .note-list__item-content {
         display: flex;
         align-items: center;
         .left-box {
           flex: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          height: 50px;
           .title {
             display: flex;
             align-items: center;
             .icon {
-              width: 18px;
-              height: 18px;
-              line-height: 18px;
+              width: 20px;
+              height: 20px;
+              line-height: 20px;
               margin-right: 5px;
               text-align: center;
-              border-radius: 4px;
+              border-radius: 2px;
               i {
                 font-size: 14px;
                 font-weight: bold;
@@ -203,7 +209,8 @@ export default {
               }
             }
             .note-title {
-              width: 140px;
+              width: 135px;
+              font-size: 13px;
               color: #000000;
               overflow: hidden;
             }
@@ -212,9 +219,9 @@ export default {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-top: 8px;
+            // margin-top: 8px;
             color: #0a419b;
-            font-size: 12px;
+            font-size: 10px;
             .introduction-btn {
               margin-right: 10px;
               font-size: 10px;
@@ -229,17 +236,20 @@ export default {
         }
         .right-box {
           .cover-img {
-            width: 60px;
-            height: 44px;
+            display: block;
+            width: 55px;
+            height: 50px;
             overflow: hidden;
           }
         }
       }
     }
     .active-note-style {
-      background: rgba(37, 215, 255, 0.4);
+      border: 1px solid #1dbde1;
+      background: rgba(26, 152, 180, 0.3);
       &:hover {
-        background: rgba(37, 215, 255, 0.4);
+        border: 1px solid #1dbde1;
+        background: rgba(26, 152, 180, 0.3);
       }
     }
   }

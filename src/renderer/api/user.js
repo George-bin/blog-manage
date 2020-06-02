@@ -25,3 +25,12 @@ export function logonRequest () {
     method: 'post'
   })
 }
+
+// 更新用户信息
+export function updateUserRequest (data) {
+  return request({
+    url: '/user',
+    method: 'put',
+    data
+  })
+}

@@ -15,10 +15,6 @@ export default new Router({
       path: '/',
       name: '/',
       redirect: '/login'
-      // component: require('@/components/EventList').default
-      // component: require('@/components/Editor').default
-      // component: require('@/components/Login').default
-      // component: require('@/components/EditorEvent').default
     },
     {
       path: '/home',
@@ -42,12 +38,16 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: () => import('@/views/login/Login')
-      // component: () => import('@/views/home/children/demo')
+    },
+    {
+      path: '/updateUser',
+      name: 'UpdateUser',
+      component: () => import('@/views/user/updateAccount')
     },
     {
       path: '/register',
       name: 'register',
-      component: require('@/views/register/register').default
+      component: require('@/views/user/register').default
     }
   ]
 })

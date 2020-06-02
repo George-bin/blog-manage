@@ -1,4 +1,9 @@
-import { loginRequest, registerRequest, logonRequest } from '../../api/user'
+import {
+  loginRequest,
+  registerRequest,
+  logonRequest,
+  updateUserRequest
+} from '../../api/user'
 
 const user = {
   state: {
@@ -52,11 +57,27 @@ const user = {
     Logon ({ commit }) {
       return new Promise((resolve, reject) => {
         logonRequest()
-          .then(response => {
+          .then(res => {
             commit('SET_NOTE_LIST', [])
             commit('SET_ACTIVE_MODULE', '')
             commit('SET_IS_Login', false)
-            resolve(response.data)
+            resolve(res.data)
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
+    },
+    // 更新用户信息
+    UpdateUser ({ commit }, data) {
+      return new Promise((resolve, reject) => {
+        updateUserRequest(data)
+          .then(res => {
+            let { errcode, userInfo } = res.data
+            if (errcode === 0) {
+              commit('SET_USER_INFO', userInfo)
+            }
+            resolve(res.data)
           })
           .catch(err => {
             reject(err)

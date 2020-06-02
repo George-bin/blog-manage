@@ -1,6 +1,10 @@
 <template>
   <div class="global-drag-window">
-    <p class="app-name">BM</p>
+    <div class="app-info">
+      <img class="app-logo" src="../../../../static/img/logo.png" alt="avatar" />
+      <p class="app-name">BM</p>
+    </div>
+    
     <div class="global-drag-window-box">
       <div class="global-top-btn global-top-btn-close" @click="windowClose" title="关闭">
         <i class="iconfont icon-htmal5icon21"></i>
@@ -60,12 +64,21 @@ export default {
   justify-content: space-between;
   width: 100%;
   height: 26px;
-  background: #fff;
+  background: #f7f7f7;
   -webkit-app-region: drag;
-  .app-name {
-    padding-left: 10px;
-    color: gray;
-    // color: #333;
+  .app-info {
+    display: flex;
+    align-items: center;
+    padding-left: 18px;
+    .app-logo {
+      width: 20px;
+      height: 20px;
+    }
+    .app-name {
+      margin-left: 5px;
+      color: gray;
+      // color: #333;
+    }
   }
   .global-drag-window-box {
     display: flex;
@@ -79,7 +92,7 @@ export default {
       line-height: 26px;
       text-align: center;
       color: gray;
-      background: #fff;
+      background: #f7f7f7;
       -webkit-app-region: no-drag;
       i {
         font-size: 14px;
@@ -93,7 +106,7 @@ export default {
       background: #fb1a2c;
     }
     .global-top-btn-close:hover i {
-      color: #fff;
+      color: #f7f7f7;
     }
   }
 }

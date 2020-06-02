@@ -9,7 +9,7 @@
         @keyup.enter="handleQuillFocus" />
       <span
         :style="{
-          background: changeFlag ? 'red' : '#00c300'
+          background: changeFlag ? 'red' : '#dfdfdf'
         }"
         class="article-change-flag"></span>
       <el-select
@@ -33,8 +33,8 @@
 
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex'
-let editor = null
 import E from 'wangeditor' // eslint-disable-line
+let editor = null
 export default {
   components: {},
   data () {
@@ -50,7 +50,10 @@ export default {
         account: '', // 关联账户
         notebookId: '' // 笔记本id
       },
-      oldContent: '', // 旧数据 => 用于判断是否更新
+      oldNote: { // 旧数据 => 用于判断是否更新
+        title: '',
+        content: ''
+      },
       serverUrl: '',
       network: {
         ip: '127.0.0.1',
@@ -67,9 +70,17 @@ export default {
     })
   },
   watch: {
+    'note.title': function (val, oldval) {
+      let content = editor.txt.html()
+      if (val !== this.oldNote.title || (content !== this.oldNote.content && content !== '<p><br></p>')) {
+        this.changeFlag = true
+      } else {
+        this.changeFlag = false
+      }
+    },
     activeNote: {
       handler: function (val, oldval) {
-        this.oldContent = val.content
+        this.oldNote = JSON.parse(JSON.stringify(val))
         if (this.changeFlag) {
           this.$confirm('文章尚未保存，是否需要保存？', '提示', {
             type: 'warning'
@@ -99,6 +110,7 @@ export default {
   created () {},
   mounted () {
     this.note = JSON.parse(JSON.stringify(this.activeNote))
+    this.oldNote = JSON.parse(JSON.stringify(this.activeNote))
     let network = localStorage.getItem('network')
     if (network) {
       this.network = JSON.parse(network)
@@ -125,6 +137,7 @@ export default {
         '#bbbbbb', '#a10000', '#b26b00', '#b2b200', '#006100', '#0047b2', '#6b24b2',
         '#444444', '#5c0000', '#663d00', '#666600', '#003700', '#002966', '#3d1466'
       ]
+      editor.customConfig.debug = true
       editor.customConfig.uploadImgShowBase64 = false // 使用 base64 保存图片
       editor.customConfig.uploadImgServer = 'http://127.0.0.1:10023/api/blog/uploadfile' // 上传图片到服务器，配置服务器端地址
       // 隐藏“网络图片”tab
@@ -205,9 +218,9 @@ export default {
         // console.log(html)
         this.changeFlag = true
         let content = editor.txt.html()
-        // console.log('oldContent', this.oldContent)
+        // console.log('this.oldNote.content', this.oldNote.content)
         // console.log('content', content)
-        if (this.oldContent === content) {
+        if (this.oldNote.content === content || content === '<p><br></p>') {
           this.changeFlag = false
         }
       }
@@ -215,14 +228,22 @@ export default {
       editor.customConfig.onfocus = () => {
         // console.log('onfocus')
         let content = editor.txt.html()
-        // console.log('oldContent', this.oldContent)
+        // console.log('this.oldNote.content', this.oldNote.content)
         // console.log('content', content)
-        if (this.oldContent === content) {
+        if (this.oldNote.content === content) {
           this.changeFlag = false
         }
       }
       editor.create() // 创建富文本实例
       editor.txt.html(this.note.content)
+      /* eslint-disable */
+      this.$nextTick(() => {
+        $('.w-e-text-container .w-e-text').addClass('main-scrollbar')
+        if (!this.isMac) {
+          $('.w-e-text-container').addClass('w-e-text-container-window')
+        }
+      })
+      /* eslint-enable */
     },
 
     // 更新笔记
@@ -327,6 +348,7 @@ export default {
       height: 36px;
       line-height: 36px;
       padding: 0 5px;
+      padding-right: 20px;
       border: none;
       border-bottom: 1px solid #f1f1f1;
       outline: none;
@@ -353,10 +375,10 @@ export default {
     background: none !important;
     .w-e-menu:nth-child(1),
     .w-e-menu:nth-child(3),
-    .w-e-menu:nth-child(4),
+    .w-e-menu:nth-child(7),
     .w-e-menu:nth-child(8),
     .w-e-menu:nth-child(9),
-    .w-e-menu:nth-child(11),
+    .w-e-menu:nth-child(10),
     .w-e-menu:nth-child(12) {
       z-index: 2 !important;
     }
@@ -397,23 +419,36 @@ export default {
     }
   }
   .w-e-text-container {
+    width: calc(100%);
     height: calc(100vh - 55px - 38px) !important;
     border: none !important;
     font-size: 16px;
-    color: #333333;
+    color: #000;
     z-index: 0 !important;
+    .w-e-text pre {
+      width: calc(100vw - 220px - 240px - 25px - 14px) !important;
+    }
     .w-e-text code {
-      width: calc(100vw - 220px - 240px - 25px) !important;
+      width: calc(100vw - 220px - 240px - 25px - 14px) !important;
+      padding: 5px;
+      max-height: 340px;
       margin: 0;
+      font-size: 14px;
+      overflow: auto;
+      border-radius: 0;
+    }
+    .w-e-text img {
+      max-width: 500px;
     }
     .w-e-text blockquote {
+      margin: 5px 0;
       border-left: 4px solid #dfdfdf;
     }
     ol li {
-      list-style: disc;
+      list-style: decimal;
     }
     ul li {
-      list-style: decimal;
+      list-style: disc;
     }
     h1, h2, h3, h4, h5, h6, h7 {
       font-weight: bold;
@@ -425,6 +460,25 @@ export default {
     h5 { font-size: 14px }
     h6 { font-size: 12px }
     h7 { font-size: 10px }
+    .w-e-text p,
+    .w-e-text h1,
+    .w-e-text h2,
+    .w-e-text h3,
+    .w-e-text h4,
+    .w-e-text h5,
+    .w-e-text table,
+    .w-e-text pre {
+      margin: 0;
+      margin-top: 5px;
+    }
+    .w-e-panel-container {
+      li {
+        list-style: none;
+      }
+    }
+  }
+  .w-e-text-container-window {
+    height: calc(100vh - 28px - 55px - 40px) !important;
   }
 }
 </style>

@@ -131,20 +131,27 @@ body {
 }
 
 /*滚动条整体样式*/
-::-webkit-scrollbar {
+.main-scrollbar::-webkit-scrollbar {
   width: 4px; /*高宽分别对应横竖滚动条的尺寸*/
   height: 1px;
+  cursor: pointer;
 }
 /*滚动条里面小方块*/
-::-webkit-scrollbar-thumb {
-  border-radius: 10px;
+.main-scrollbar::-webkit-scrollbar-thumb {
+  /* border-radius: 10px; */
   -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
   /*background: #535353;*/
   background: #bababa;
 }
 /*滚动条里面轨道*/
-::-webkit-scrollbar-track {
+.main-scrollbar::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
+  /* border-radius: 10px; */
   background: #dfdfdf;
+}
+.main-scrollbar::-webkit-scrollbar-thumb:hover{
+  background: gray;
+}
+.main-scrollbar::-webkit-scrollbar-corner{
+  background: #179a16;
 }

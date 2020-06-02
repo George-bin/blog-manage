@@ -22,8 +22,8 @@
     "postinstall": "npm run lint:fix"
   },
   "build": {
-    "productName": "blog-manage",
-    "appId": "com.example.yourapp",
+    "productName": "BM",
+    "appId": "blog-manage",
     "directories": {
       "output": "build"
     },
