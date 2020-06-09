@@ -1,5 +1,5 @@
 {
-  "name": "blog-manage",
+  "name": "BM",
   "version": "0.0.1",
   "author": "gsb <770021714@qq.com>",
   "description": "An electron-vue project",
@@ -23,7 +23,7 @@
   },
   "build": {
     "productName": "BM",
-    "appId": "blog-manage",
+    "appId": "BM",
     "directories": {
       "output": "build"
     },
