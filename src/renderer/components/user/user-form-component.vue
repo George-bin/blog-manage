@@ -1,5 +1,5 @@
 <template>
-  <div class="account-info-component">
+  <div class="user-form-component">
     <!--输入框区域-->
     <!-- :show-message="false" -->
     <el-form
@@ -71,7 +71,7 @@
       </el-form-item>
       <el-form-item>
         <el-button :loading="loading" type="primary" @click.native="handleClickSubmit" class="btn-button">提交</el-button>
-        <el-button class="btn-button" @click="handleClickGoBack">取消</el-button>
+        <el-button class="btn-button" @click="handleClickReset">重置</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -166,15 +166,42 @@ export default {
         }
       })
     },
-    handleClickGoBack () {
-      this.$router.back()
+    /**
+     * 重置表单
+     */
+    handleClickReset () {
+      if (this.type === 'update') {
+        this.formData = {
+          account: this.userInfo.account,
+          username: this.userInfo.username,
+          email: this.userInfo.email,
+          phone: this.userInfo.phone,
+          age: this.userInfo.age,
+          sex: this.userInfo.sex,
+          avatar: this.userInfo.avatar,
+          password: '',
+          newPassword: ''
+        }
+      } else {
+        this.formData = {
+          account: '',
+          password: '',
+          username: '',
+          email: '',
+          phone: '',
+          age: '',
+          sex: '男',
+          avatar: '',
+          newPassword: ''
+        }
+      }
     }
   }
 }
 </script>
 
 <style lang="scss">
-.account-info-component {
+.user-form-component {
   .el-form-item {
     // margin-bottom: 6px;
     .el-input__inner {

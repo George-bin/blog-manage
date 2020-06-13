@@ -40,11 +40,6 @@ export default new Router({
       component: () => import('@/views/login/Login')
     },
     {
-      path: '/updateUser',
-      name: 'UpdateUser',
-      component: () => import('@/views/user/updateAccount')
-    },
-    {
       path: '/register',
       name: 'register',
       component: require('@/views/user/register').default

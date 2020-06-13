@@ -8,11 +8,6 @@
           @click="handleClickLogon">
           退出登录
         </li>
-        <li
-          class="setup-list__item"
-          @click="handleClickGoUpdateUser">
-          账户设置
-        </li>
       </template>
       <template v-else>
         <li
@@ -27,7 +22,6 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-// import { destoryAxios } from '../../utils/request'
 export default {
   data () {
     return {
@@ -77,10 +71,6 @@ export default {
             })
         })
         .catch(() => {})
-    },
-
-    handleClickGoUpdateUser () {
-      this.$router.push('/updateUser')
     },
 
     // 网络设置

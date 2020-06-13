@@ -128,6 +128,7 @@ export default {
       'UpdateNoteAttr'
     ]),
     init () {
+      let that = this
       editor = new E(this.$refs.editorElem)
       // 自定义配置颜色（字体颜色、背景色）
       editor.customConfig.colors = [
@@ -139,7 +140,8 @@ export default {
       ]
       editor.customConfig.debug = true
       editor.customConfig.uploadImgShowBase64 = false // 使用 base64 保存图片
-      editor.customConfig.uploadImgServer = 'http://127.0.0.1:10023/api/blog/uploadfile' // 上传图片到服务器，配置服务器端地址
+      // 上传图片到服务器，配置服务器端地址
+      editor.customConfig.uploadImgServer = this.serverUrl
       // 隐藏“网络图片”tab
       editor.customConfig.showLinkImg = false
       // 将图片大小限制为 3M
@@ -175,6 +177,7 @@ export default {
       // 图片上传钩子
       editor.customConfig.uploadImgHooks = {
         before: function (xhr, editor, files) {
+          that.loading = true
           // 图片上传之前触发
           // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象，files 是选择的图片文件
           // 如果返回的结果是 {prevent: true, msg: 'xxxx'} 则表示用户放弃上传
@@ -184,16 +187,23 @@ export default {
           // }
         },
         success: function (xhr, editor, result) {
+          that.loading = false
           // 图片上传并返回结果，图片插入成功之后触发
           // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象，result 是服务器端返回的结果
         },
         fail: function (xhr, editor, result) {
+          that.loading = false
           // 图片上传并返回结果，但图片插入错误时触发
           // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象，result 是服务器端返回的结果
         },
         error: function (xhr, editor) {
           // 图片上传出错时触发
           // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象
+          that.loading = false
+          this.$message({
+            type: 'warning',
+            message: '图片上传错误!'
+          })
         },
         timeout: function (xhr, editor) {
           // 图片上传超时时触发
@@ -207,7 +217,8 @@ export default {
           // insertImg 是插入图片的函数，editor 是编辑器对象，result 是服务器端返回的结果
 
           // 举例：假如上传图片成功后，服务器端返回的是 {url:'....'} 这种格式，即可这样插入图片：
-          var url = `http://127.0.0.1${result.filePath}`
+          var url = `http://${that.network.ip}${result.filePath}`
+
           insertImg(url)
 
           // result 必须是一个 JSON 格式字符串！！！否则报错
@@ -348,14 +359,16 @@ export default {
       height: 36px;
       line-height: 36px;
       padding: 0 5px;
-      padding-right: 20px;
-      border: none;
-      border-bottom: 1px solid #f1f1f1;
+      padding-right: 25px;
+      border: 1px solid #fff;
       outline: none;
+      &:focus {
+        border: 1px solid #ccc;
+      }
     }
     .article-change-flag {
       position: absolute;
-      right: 95px;
+      right: 105px;
       width: 10px;
       height: 10px;
       background: #00c300;
@@ -472,6 +485,9 @@ export default {
     .w-e-text pre {
       margin: 0;
       margin-top: 5px;
+    }
+    .w-e-text p {
+      margin-top: 8px;
     }
     .w-e-panel-container {
       li {

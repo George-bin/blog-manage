@@ -83,6 +83,7 @@ export default {
 
     // 显示右键菜单
     handleClickShowRightKeyMenu (event, item) {
+      console.log(item)
       this.SET_ACTIVE_NOTEBOOK(item)
       this.$nextTick(() => {
         this.SET_RIGHT_MENU_POSITION({

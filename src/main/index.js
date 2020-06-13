@@ -15,7 +15,7 @@ if (process.env.NODE_ENV !== 'development') {
 
 let mainWindow
 const winURL = process.env.NODE_ENV === 'development'
-  ? `http://localhost:9080`
+  ? `http://localhost:9088`
   : `file://${__dirname}/index.html`
 
 // 用一个 Tray 来表示一个图标,这个图标处于正在运行的系统的通知区 ，通常被添加到一个 context menu 上.
@@ -231,6 +231,9 @@ ipcMain.on('topWinClose', function (event) {
   mainWindow.setSkipTaskbar(true)
   event.preventDefault()
 })
+
+// 强制刷新缓存
+app.commandLine.appendSwitch('--disable-http-cache')
 
 app.on('ready', createWindow)
 

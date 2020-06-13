@@ -1,11 +1,17 @@
 <template>
   <div class="register-account-component">
-    <div class="register-account-box">
-      <m-header title="注册用户" icon="el-icon-user-solid"></m-header>
-      <div class="register-account-content">
-        <account-info :loading="loading" @submit="handleClickRegister"></account-info>
+    <m-dialog
+      ref="mDialog"
+      title="个人信息"
+      width="70%"
+      icon="el-icon-user-solid"
+      :isFull="true"
+      :isShowFooter="false"
+      @closed="onDialogClosed">
+      <div slot="dialogContent">
+        <user-form :loading="loading" @submit="handleClickRegister"></user-form>
       </div>
-    </div>
+    </m-dialog>
   </div>
 </template>
 
@@ -14,8 +20,8 @@ import { mapState, mapActions } from 'vuex'
 
 export default {
   components: {
-    MHeader: () => import('@/components/common/m-header-component.vue'),
-    AccountInfo: () => import('@/components/account/account-info-component.vue')
+    MDialog: () => import('@/components/common/m-dialog-component'),
+    UserForm: () => import('@/components/user/user-form-component.vue')
   },
   data () {
     return {

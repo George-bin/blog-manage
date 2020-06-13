@@ -41,7 +41,11 @@
           </div>
           <!-- 密码框 -->
           <div class="login-form-item input__inner">
-            <input v-model="formData.password" placeholder="Password" type="password" autocomplete="off" />
+            <input
+              v-model="formData.password"
+              placeholder="Password"
+              type="password"
+              @keyup.enter="handleClickLogin" />
           </div>
           <div class="login-form-item remember-checkbox">
             <div class="left-box">
@@ -62,6 +66,8 @@
         </div>
       </div>
     </div>
+    <!-- 注册用户 -->
+    <register-user ref="registerUser"></register-user>
   </div>
 </template>
 
@@ -72,6 +78,9 @@ import { validatorSpace } from '@/utils/script/validatorData'
 import { ipcRenderer } from 'electron'
 
 export default {
+  components: {
+    RegisterUser: () => import('@/components/user/register-user-component.vue')
+  },
   data () {
     return {
       rememberMe: false,
@@ -102,7 +111,6 @@ export default {
       localStorage.setItem('rememberMe', val)
     }
   },
-  components: {},
   created () {
     this.init()
   },
@@ -220,8 +228,7 @@ export default {
 
     // 前往注册
     handleClickGoRegister () {
-      console.log(123)
-      this.$router.push({ path: '/register' })
+      this.$refs.registerUser.$emit('visible')
     }
   }
 }

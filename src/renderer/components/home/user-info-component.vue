@@ -30,8 +30,11 @@ export default {
   created () {},
   mounted () {},
   methods: {
+    /**
+     * 前往编辑个人信息
+     */
     handleClickGoUpdateUser () {
-      this.$router.push('/updateUser')
+      this.$emit('updateUser')
     }
   }
 }

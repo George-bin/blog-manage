@@ -1,13 +1,11 @@
 <template>
   <div class="note-introduction-component">
-    <el-dialog
-      :visible.sync="dialogVisible"
-      :modal="false"
-      :close-on-click-modal="false"
-      width="500px"
-      @close="onClose">
-      <h3 slot="title" class="el-dialog__headertitle">笔记简介</h3>
-      <div class="el-dialog__content">
+    <m-dialog
+      ref="mDialog"
+      title="笔记简介"
+      icon="el-icon-tickets"
+      width="550px">
+      <template slot="dialogContent">
         <el-form ref="form" :model="formData" :rules="rules" label-width="60px">
           <el-form-item label="封面:" prop="img">
             <el-upload
@@ -32,12 +30,11 @@
             </el-input>
           </el-form-item>
         </el-form>
-      </div>
-      <div class="el-dialog__btngtoup">
-        <el-button @click="onClose">取消</el-button>
-        <el-button :loading="loading" @click="handleClickSubmit">确定</el-button>
-      </div>
-    </el-dialog>
+      </template>
+      <template slot="dialogFooter">
+        <el-button :loading="loading" type="primary" @click="handleClickSubmit">提交</el-button>
+      </template>
+    </m-dialog>
   </div>
 </template>
 
@@ -46,14 +43,15 @@ import { mapActions } from 'vuex'
 export default {
   name: '',
   props: {},
-  components: {},
+  components: {
+    MDialog: () => import('@/components/common/m-dialog-component')
+  },
   data () {
     return {
-      dialogVisible: false,
       loading: false,
       serverUrl: '',
       network: {
-        ip: '12.0.0.1',
+        ip: '127.0.0.1',
         port: '10023'
       },
       fileList: [],
@@ -81,7 +79,7 @@ export default {
     this.init()
     this.$nextTick(() => {
       this.$on('showDialog', (data) => {
-        this.dialogVisible = true
+        this.$refs.mDialog.$emit('visible', true)
         this.formData = {
           _id: data._id,
           introduction: data.introduction,
@@ -100,9 +98,6 @@ export default {
         this.network = JSON.parse(network)
       }
       this.serverUrl = `http://${this.network.ip}:${this.network.port}` + '/api/blog/uploadfile'
-    },
-    onClose () {
-      this.dialogVisible = false
     },
     // 上传成功
     handleUploadImgSuccess (res, file, fileList) {
@@ -131,8 +126,10 @@ export default {
     },
     // 提交表单
     handleClickSubmit () {
+      if (this.loading) return
       this.$refs['form'].validate((valid) => {
         if (valid) {
+          this.loading = true
           this.UpdateNoteAttr({
             ...this.formData
           })
@@ -144,7 +141,7 @@ export default {
                   message: '成功!',
                   duration: 1000
                 })
-                this.dialogVisible = false
+                this.$refs.mDialog.$emit('visible', false)
                 return
               }
               this.$message({
@@ -159,6 +156,9 @@ export default {
                 message: '更新笔记简介失败!'
               })
             })
+            .finally(() => {
+              this.loading = false
+            })
         } else {
           console.log('error submit!')
           return false
@@ -171,63 +171,8 @@ export default {
 
 <style lang="scss">
 .note-introduction-component {
-  .el-dialog {
-    border: 1px solid #A7A7A7;
-    border-radius: 0;
-    .el-dialog__header {
-      display: flex;
-      align-items: center;
-      height: 30px;
-      padding: 0;
-      .el-dialog__headertitle {
-        flex: 1;
-        padding-left: 10px;
-      }
-      .el-dialog__headerbtn {
-        position: static;
-        .el-dialog__close {
-          width: 30px;
-          height: 30px;
-          line-height: 30px;
-        }
-        .el-dialog__close:hover {
-          color: #FFFFFF !important;
-        }
-      }
-      .el-dialog__headerbtn:hover {
-        background: #FF0000;
-      }
-    }
-    .el-dialog__body {
-      padding: 0 10px;
-      background: #F7F7F7;
-      .el-dialog__content {
-        .cover-img {
-          display: block;
-          max-width: 160px;
-        }
-      }
-      .el-dialog__btngtoup {
-        padding: 10px 0;
-        text-align: right;
-        button {
-          width: 80px;
-          height: 22px;
-          padding: 0;
-          font-size: 12px;
-          color: #333;
-          background: #F3F3F3;
-          border: 1px solid #A7A7A7;
-          outline: none;
-          border-radius: 0;
-          &:hover {
-            // border: 1px solid #0A419B;
-            color: #333;
-            background: #fff;
-          }
-        }
-      }
-    }
+  .cover-img {
+    width: 200px;
   }
 }
 </style>

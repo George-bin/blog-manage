@@ -1,6 +1,6 @@
 /*更新element style*/
 .el-message-box {
-  border: 1px solid #a7a7a7;
+  border: none;
   padding-bottom: 0;
   border-radius: 0;
 }
@@ -42,18 +42,14 @@
   width: 80px;
   height: 22px;
   padding: 0;
-  border: 1px solid #a7a7a7;
+  /* border: 1px solid #a7a7a7; */
   border-radius: 0;
-  color: #333333;
-  background: #ffffff;
+  /* color: #333333; */
+  /* background: #ffffff; */
 }
-.el-message-box .el-message-box__btns .el-button--primary:hover,
-.el-message-box .el-message-box__btns .el-button--default:hover {
-  background: #f1f1f1;
-}
-.v-modal {
+/* .v-modal {
   background: none;
-}
+} */
 
 /*el-message*/
 .el-message {
@@ -65,7 +61,12 @@
   color: #333333;
 }
 
-.ql-editor {
-  font-size: 16px;
-  color: black;
+/* .el-dialog */
+.el-dialog__wrapper {
+  background: rgba(0,0,0,0.4);
+}
+
+/* el-input */
+.el-input__inner {
+  border-radius: 0;
 }

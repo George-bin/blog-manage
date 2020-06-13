@@ -33,7 +33,7 @@
       <li v-if="activeNotebook.grade !== 1" @click="handleClickStartUpdateNotebook">重命名</li>
       <li
         :style="{
-          color: activeNotebook.children.length ? 'gray' : '#333'
+          color: activeNotebook.total ? 'gray' : '#333'
         }"
         @click="handleDeleteBotebook">
         删除文件夹
@@ -93,7 +93,7 @@ export default {
 
     // 删除笔记本
     handleDeleteBotebook () {
-      if (this.activeNotebook.children.length) return
+      if (this.activeNotebook.children.length || this.activeNotebook.total) return
       this.$confirm('确定删除该笔记本吗?', '提示', {
         type: 'warning'
       })
@@ -135,7 +135,7 @@ export default {
         updateTime: null, // 更新时间
         type: 'draft',
         label: [], // 关联标签 draft：草稿 main：正文
-        account: this.userInfo.account, // 关联账户
+        account: '', // 关联账户
         notebookId: this.activeNotebook._id, // 笔记本id
         introduction: '', // 简介
         img: '' // 图片地址

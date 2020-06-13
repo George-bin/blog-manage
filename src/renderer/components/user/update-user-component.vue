@@ -1,37 +1,54 @@
 <template>
   <div class="update-account-component">
-    <div class="update-account-box">
-      <m-header title="账户设置" icon="el-icon-user-solid"></m-header>
-      <div class="update-account-content">
-        <account-info :loading="loading" type="update" @submit="handleClickUpdateAccount"></account-info>
+    <m-dialog
+      ref="mDialog"
+      title="个人信息"
+      width="70%"
+      icon="el-icon-user-solid"
+      :isFull="true"
+      :isShowFooter="false">
+      <div slot="dialogContent">
+        <user-form :loading="loading" type="update" @submit="handleClickUpdateAccount"></user-form>
       </div>
-    </div>
+    </m-dialog>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
-
+import { mapActions } from 'vuex'
 export default {
+  name: '',
+  prop: {},
   components: {
-    MHeader: () => import('@/components/common/m-header-component.vue'),
-    AccountInfo: () => import('@/components/account/account-info-component.vue')
+    MDialog: () => import('@/components/common/m-dialog-component'),
+    UserForm: () => import('@/components/user/user-form-component.vue')
   },
   data () {
     return {
       loading: false
     }
   },
-  computed: {
-    ...mapState({
-      isMac: state => state.home.isMac
+  computed: {},
+  watch: {},
+  created () {
+  },
+  mounted () {
+    this.$nextTick(() => {
+      this.$on('visible', () => {
+        this.$refs.mDialog.$emit('visible', true)
+      })
     })
   },
+  beforeDestroy () {},
+  destroyed () {},
   methods: {
     ...mapActions([
       'UpdateUser'
     ]),
-    // 用户注册
+    /**
+     * 更新用户信息
+     * @params data: 用户表单数据
+     */
     handleClickUpdateAccount (data) {
       data = JSON.parse(JSON.stringify(data))
       if (data.password && data.newPassword) {
@@ -47,7 +64,7 @@ export default {
               type: 'success',
               message: '更新成功!'
             })
-            this.$router.back()
+            this.$refs.mDialog.$emit('visible', false)
             return
           }
           this.$message({
@@ -61,28 +78,12 @@ export default {
         .finally(() => {
           this.loading = false
         })
-    },
-    // 取消注册
-    handleClickGoBack () {
-      this.$router.back()
     }
   }
 }
 </script>
 
 <style lang="scss">
-  .update-account-component {
-    height: calc(100vh - 40px);
-    padding-top: 40px;
-    // background: #f7f7f7;
-    overflow: auto;
-    .update-account-box {
-      padding: 0 20px;
-      .update-account-content {
-        max-width: 800px;
-        padding-top: 20px;
-        margin: 0 auto;
-      }
-    }
-  }
+.update-account-component {
+}
 </style>

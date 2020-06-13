@@ -163,6 +163,9 @@ export default {
       border: 1px solid #f1f1f1;
       background: none;
       outline: none;
+      &:focus {
+        border: 1px solid #ccc;
+      }
     }
     i {
       position: absolute;

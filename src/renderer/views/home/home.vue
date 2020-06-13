@@ -10,7 +10,7 @@
       <el-aside
         class="aside-menu-section">
         <!-- 用户信息 -->
-        <user-info></user-info>
+        <user-info @updateUser="onGoUpdateUser"></user-info>
         <div
           :style="{
             height: isMac ? 'calc(100vh - 56px - 50px)' : 'calc(100vh - 26px - 56px - 50px)'
@@ -57,8 +57,9 @@
     <create-notebook-dialog ref="createNotebookDialog"></create-notebook-dialog>
     <!--重命名笔记本-->
     <update-notebook-dialog ref="updateNotebookDialog"></update-notebook-dialog>
+    <!-- 更新用户信息 -->
+    <update-user ref="updateUser"></update-user>
   </div>
-  <!-- https://github.com/electron-userland/electron-builder-binaries/releases/download/winCodeSign-2.4.0/winCodeSign-2.4.0.7z -->
 </template>
 
 <script>
@@ -72,7 +73,8 @@ export default {
     UpdateNotebookDialog: () => import('@/components/notebook/update-notebook-dialog.vue'),
     CreateNotebookDialog: () => import('@/components/notebook/create-notebook-dialog.vue'),
     NotebookRightMenu: () => import('@/components/notebook/notebook-right-menu-component.vue'),
-    NoteRightMenu: () => import('@/components/note/note-right-menu-component')
+    NoteRightMenu: () => import('@/components/note/note-right-menu-component.vue'),
+    UpdateUser: () => import('@/components/user/update-user-component.vue')
   },
   data () {
     return {
@@ -153,6 +155,13 @@ export default {
             message: '获取废纸篓中的数据失败!'
           })
         })
+    },
+
+    /**
+     * 准备更新个人信息
+     */
+    onGoUpdateUser () {
+      this.$refs.updateUser.$emit('visible')
     }
 
     // 播放音乐

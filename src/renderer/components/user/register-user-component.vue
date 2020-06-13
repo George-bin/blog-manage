@@ -1,11 +1,16 @@
 <template>
   <div class="register-account-component">
-    <div class="register-account-box">
-      <m-header title="注册用户" icon="el-icon-user-solid"></m-header>
-      <div class="register-account-content">
-        <user-form :loading="loading" @submit="handleClickRegister"></user-form>
+    <m-dialog
+      ref="mDialog"
+      title="个人注册"
+      width="70%"
+      icon="el-icon-user-solid"
+      :isFull="true"
+      :isShowFooter="false">
+      <div slot="dialogContent">
+        <user-form :loading="loading" @submit="onSubmitRegister"></user-form>
       </div>
-    </div>
+    </m-dialog>
   </div>
 </template>
 
@@ -14,7 +19,7 @@ import { mapState, mapActions } from 'vuex'
 
 export default {
   components: {
-    MHeader: () => import('@/components/common/m-header-component.vue'),
+    MDialog: () => import('@/components/common/m-dialog-component'),
     UserForm: () => import('@/components/user/user-form-component.vue')
   },
   data () {
@@ -27,12 +32,22 @@ export default {
       isMac: state => state.home.isMac
     })
   },
+  mounted () {
+    this.$nextTick(() => {
+      this.$on('visible', (data) => {
+        this.$refs.mDialog.$emit('visible', true)
+      })
+    })
+  },
   methods: {
     ...mapActions([
       'Register'
     ]),
-    // 用户注册
-    handleClickRegister (data) {
+    /**
+     * 监听用户注册
+     * @params data: 用户表单数据
+     */
+    onSubmitRegister (data) {
       data = JSON.parse(JSON.stringify(data))
       data.password = this.$md5(data.password)
       this.loading = true
@@ -44,7 +59,7 @@ export default {
               type: 'success',
               message: '注册成功!'
             })
-            this.$router.back()
+            this.$refs.mDialog.$emit('visible', false)
             return
           }
           this.$message({
@@ -58,10 +73,6 @@ export default {
         .finally(() => {
           this.loading = false
         })
-    },
-    // 取消注册
-    cancelRegister () {
-      this.$router.push('/login')
     }
   }
 }
@@ -69,7 +80,6 @@ export default {
 
 <style lang="scss">
   .register-account-component {
-    height: calc(100vh - 40px);
     padding-top: 40px;
     // background: #f7f7f7;
     overflow: auto;
