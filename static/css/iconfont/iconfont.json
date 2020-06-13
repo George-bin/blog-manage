@@ -1,10 +1,31 @@
 {
   "id": "1731034",
-  "name": "BM",
+  "name": "blog-manage",
   "font_family": "iconfont",
   "css_prefix_text": "icon-",
   "description": "",
   "glyphs": [
+    {
+      "icon_id": "132180",
+      "name": "电话",
+      "font_class": "telephone",
+      "unicode": "e645",
+      "unicode_decimal": 58949
+    },
+    {
+      "icon_id": "4361001",
+      "name": "邮箱",
+      "font_class": "youxiang",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "7521550",
+      "name": "名称",
+      "font_class": "mingcheng",
+      "unicode": "e758",
+      "unicode_decimal": 59224
+    },
     {
       "icon_id": "941658",
       "name": "最大化",

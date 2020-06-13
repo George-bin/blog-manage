@@ -18,7 +18,7 @@
       </el-form-item>
       <el-form-item prop="password" :label="type === 'update' ? '原密码' : '密码'">
         <el-input
-          prefix-icon="el-icon-user-solid"
+          prefix-icon="iconfont icon-mima"
           placeholder="请输入密码!"
           v-model="formData.password"
           type="password">
@@ -26,7 +26,7 @@
       </el-form-item>
       <el-form-item v-if="type === 'update'" prop="newPassword" label="新密码">
         <el-input
-          prefix-icon="el-icon-user-solid"
+          prefix-icon="iconfont icon-mima"
           placeholder="请输入密码!"
           v-model="formData.newPassword"
           type="password">
@@ -34,21 +34,21 @@
       </el-form-item>
       <el-form-item prop="username" label="昵称">
         <el-input
-          prefix-icon="el-icon-user-solid"
+          prefix-icon="iconfont icon-mingcheng"
           placeholder="请输入用户昵称!"
           v-model="formData.username">
         </el-input>
       </el-form-item>
       <el-form-item prop="email" label="邮箱">
         <el-input
-          prefix-icon="el-icon-user-solid"
+          prefix-icon="iconfont icon-youxiang"
           placeholder="请输入用户邮箱!"
           v-model="formData.email">
         </el-input>
       </el-form-item>
       <el-form-item prop="phone" label="电话">
         <el-input
-          prefix-icon="el-icon-user-solid"
+          prefix-icon="iconfont icon-telephone"
           placeholder="请输入用户电话!"
           v-model="formData.phone">
         </el-input>
@@ -202,6 +202,7 @@ export default {
 
 <style lang="scss">
 .user-form-component {
+  max-width: 650px;
   .el-form-item {
     // margin-bottom: 6px;
     .el-input__inner {
@@ -209,6 +210,10 @@ export default {
     }
     .btn-button {
       border-radius: 0;
+    }
+    .iconfont {
+      padding-left: 5px;
+      font-size: 14px;
     }
   }
 }
