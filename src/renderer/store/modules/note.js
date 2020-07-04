@@ -28,6 +28,10 @@ const note = {
     },
     // 设置笔记列表
     SET_NOTE_LIST (state, data) {
+      let network = JSON.parse(localStorage.getItem('network'))
+      data.forEach(item => {
+        item.img = item.img ? `http://${network.ip}${item.img}` : ''
+      })
       state.noteList = data
     },
     // 当前编辑笔记
@@ -75,6 +79,8 @@ const note = {
     },
     // 更新笔记
     UPDATE_NOTE (state, data) {
+      let network = localStorage.getItem('network')
+      data.img = `http://${network.ip}${data.img}`
       let index = state.noteList.findIndex(item => {
         return item._id === data._id
       })
@@ -137,7 +143,8 @@ const note = {
             if (data.errcode === 0) {
               let note = JSON.parse(JSON.stringify(data.note))
               let network = JSON.parse(localStorage.getItem('network'))
-              let str = note.content.replace(/src="\/file\/uploads\/images\/blog/g, `src="http://${network.ip}/file/uploads/images/blog`)
+              let str = note.content.replace(/src=(|")\/file\/uploads\/images\/blog/g, `src="http://${network.ip}/file/uploads/images/blog`)
+              console.log('str:', str)
               note.content = str
               commit('SET_ACTIVE_NOTE', note)
             }
@@ -156,8 +163,6 @@ const note = {
             let { errcode, note } = res.data
             if (errcode === 0) {
               note = JSON.parse(JSON.stringify(note))
-              // let network = JSON.parse(localStorage.getItem('network'))
-              // note.content =  note.content.replace(/src="\/file\/uploads\/images\/blog/g, `src="http://${network.ip}/file/uploads/images/blog`)
               commit('UPDATE_NOTE', JSON.parse(JSON.stringify(note)))
               // commit('SET_ACTIVE_NOTE', JSON.parse(JSON.stringify(note)))
             }

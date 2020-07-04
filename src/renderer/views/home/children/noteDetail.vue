@@ -143,7 +143,7 @@ export default {
       // 上传图片到服务器，配置服务器端地址
       editor.customConfig.uploadImgServer = this.serverUrl
       // 隐藏“网络图片”tab
-      editor.customConfig.showLinkImg = false
+      // editor.customConfig.showLinkImg = false
       // 将图片大小限制为 3M
       editor.customConfig.uploadImgMaxSize = 3 * 1024 * 1024
       // 限制一次最多上传 1 张图片
@@ -260,12 +260,14 @@ export default {
     // 更新笔记
     handleUpdateNote () {
       let content = editor.txt.html()
-      if (this.network.ip === '127.0.0.1') {
-        content = content.replace(/src='http:\/\/127.0.0.1\/file\/uploads\/images\/blog/g, 'src=/file/uploads/images/blog')
+      // eslint-disable-next-line no-useless-escape
+      let reg = new RegExp('src="http:\/\/' + this.network.ip + '\/file\/uploads\/images\/blog', 'g')
+      if (this.network.ip === '127.0.0.1' || this.network.ip === 'localhost') {
+        content = content.replace(/src="http:\/\/127.0.0.1\/file\/uploads\/images\/blog/g, 'src="/file/uploads/images/blog')
       } else {
-        content = content.replace(/src='http:\/\/39.105.55.137\/file\/uploads\/images\/blog/g, 'src=/file/uploads/images/blog')
+        content = content.replace(reg, 'src="/file/uploads/images/blog')
       }
-      // console.log('content', content)
+      console.log('content', content)
       this.loading = true
       return new Promise((resolve, reject) => {
         this.UpdateNote({

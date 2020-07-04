@@ -101,7 +101,7 @@ export default {
     },
     // 上传成功
     handleUploadImgSuccess (res, file, fileList) {
-      this.formData.img = `http://${this.network.ip}${res.filePath}`
+      this.formData.img = res.filePath
       this.fileList = []
     },
     /**
@@ -130,6 +130,8 @@ export default {
       this.$refs['form'].validate((valid) => {
         if (valid) {
           this.loading = true
+          let reg = new RegExp(`http://${this.network.ip}`, 'g')
+          this.formData.img = this.formData.img.replace(reg, '')
           this.UpdateNoteAttr({
             ...this.formData
           })
