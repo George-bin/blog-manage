@@ -119,6 +119,9 @@ pre,
 code {
   font-family: Consolas;
 }
+code span {
+  letter-spacing: 1px;
+}
 
 /*禁止文字选中*/
 body {

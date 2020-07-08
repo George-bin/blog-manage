@@ -79,8 +79,10 @@ const note = {
     },
     // 更新笔记
     UPDATE_NOTE (state, data) {
-      let network = localStorage.getItem('network')
-      data.img = `http://${network.ip}${data.img}`
+      if (data.img) {
+        let network = JSON.parse(localStorage.getItem('network'))
+        data.img = `http://${network.ip}${data.img}`
+      }
       let index = state.noteList.findIndex(item => {
         return item._id === data._id
       })
