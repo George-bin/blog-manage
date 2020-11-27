@@ -66,7 +66,7 @@
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1",
     "vuex-electron": "^1.0.0",
-    "wangeditor": "^3.1.1"
+    "wangeditor": "^4.5.2"
   },
   "devDependencies": {
     "ajv": "^6.5.0",

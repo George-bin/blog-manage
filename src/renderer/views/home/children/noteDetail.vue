@@ -131,33 +131,37 @@ export default {
       let that = this
       editor = new E(this.$refs.editorElem)
       // 自定义配置颜色（字体颜色、背景色）
-      editor.customConfig.colors = [
+      editor.config.colors = [
         '#000000', '#e60000', '#ff9900', '#ffff00', '#008a00', '#0066cc', '#9933ff',
         '#ffffff', '#facccc', '#ffebcc', '#ffffcc', '#cce8cc', '#cce0f5', '#ebd6ff',
         '#ececec', '#f06666', '#ffc266', '#ffff66', '#66b966', '#66a3e0', '#c285ff',
         '#bbbbbb', '#a10000', '#b26b00', '#b2b200', '#006100', '#0047b2', '#6b24b2',
         '#444444', '#5c0000', '#663d00', '#666600', '#003700', '#002966', '#3d1466'
       ]
-      editor.customConfig.debug = true
-      editor.customConfig.uploadImgShowBase64 = false // 使用 base64 保存图片
+      editor.config.debug = true
+      editor.config.uploadImgShowBase64 = false // 使用 base64 保存图片
       // 上传图片到服务器，配置服务器端地址
-      editor.customConfig.uploadImgServer = this.serverUrl
+      editor.config.uploadImgServer = this.serverUrl
+      // 取消自动 focus
+      // editor.config.focus = false
       // 隐藏“网络图片”tab
-      // editor.customConfig.showLinkImg = false
+      // editor.config.showLinkImg = false
+      // 全屏按钮
+      editor.config.showFullScreen = false
       // 将图片大小限制为 3M
-      editor.customConfig.uploadImgMaxSize = 3 * 1024 * 1024
+      editor.config.uploadImgMaxSize = 3 * 1024 * 1024
       // 限制一次最多上传 1 张图片
-      editor.customConfig.uploadImgMaxLength = 1
+      editor.config.uploadImgMaxLength = 1
       // 编辑器的事件，每次改变会获取其html内容
-      editor.customConfig.onchange = html => {
+      editor.config.onchange = html => {
         this.editorContent = html
       }
-      editor.customConfig.menus = [
+      editor.config.menus = [
         // 菜单配置
         'head', // 标题
         'bold', // 粗体
         'fontSize', // 字号
-        // 'fontName', // 字体
+        'fontName', // 字体
         'italic', // 斜体
         'underline', // 下划线
         'strikeThrough', // 删除线
@@ -175,7 +179,7 @@ export default {
         'redo' // 重复
       ]
       // 图片上传钩子
-      editor.customConfig.uploadImgHooks = {
+      editor.config.uploadImgHooks = {
         before: function (xhr, editor, files) {
           that.loading = true
           // 图片上传之前触发
@@ -225,7 +229,7 @@ export default {
         }
       }
       // 监听内容改变
-      editor.customConfig.onchange = (html) => {
+      editor.config.onchange = (html) => {
         // console.log(html)
         this.changeFlag = true
         let content = editor.txt.html()
@@ -236,7 +240,7 @@ export default {
         }
       }
       // 获取焦点
-      editor.customConfig.onfocus = () => {
+      editor.config.onfocus = () => {
         // console.log('onfocus')
         let content = editor.txt.html()
         // console.log('this.oldNote.content', this.oldNote.content)
@@ -383,6 +387,7 @@ export default {
       margin-left: 10px;
     }
   }
+  
   .w-e-toolbar {
     flex-wrap: wrap;
     border: none !important;
@@ -411,7 +416,8 @@ export default {
       }
     }
     .w-e-menu {
-      padding: 10px;
+      width: 30px;
+      height: 30px;
       z-index: 0 !important;
       i {
         color: #4a4a4a
