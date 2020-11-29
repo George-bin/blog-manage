@@ -37,15 +37,6 @@ th,
 caption {
   font-size: 14px;
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: normal;
-  font-size: 100%;
-}
 /*address, caption, cite, code, dfn, em, strong, th, var { font-style:normal; font-weight:normal;}*/
 a {
   color: #555;
@@ -93,15 +84,6 @@ html {
   white-space: nowrap;
 }
 
-pre {
-  /* max-height: 300px; */
-  padding: 10px;
-  font-size: 14px;
-  background: #1c2327;
-  border-radius: 5px;
-  /* overflow: auto !important; */
-}
-
 .ql-snow .ql-editor pre.ql-syntax {
   color: #333333;
   background: #e9ecef;
@@ -131,6 +113,7 @@ body {
   -ms-user-select: none; /*IE10+*/
   -khtml-user-select: none; /*早期的浏览器*/
   user-select: none;
+  font-family: "Microsoft YaHei", "Arial", "黑体", "宋体", sans-serif;
 }
 
 /*滚动条整体样式*/

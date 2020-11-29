@@ -14,6 +14,10 @@ import '../../static/css/theme/index.css'
 // 引入全局函数
 import './utils/script/global-function'
 
+// highlight.js代码高亮样式
+// import 'highlight.js/styles/monokai-sublime.css'
+import 'highlight.js/styles/googlecode.css' // 样式文件
+
 // 引入css文件
 import '../../static/css/index.css'
 import $ from 'jquery'

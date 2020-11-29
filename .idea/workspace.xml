@@ -1,13 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="16834953-8e6a-470b-bcbd-85e9aabc88ae" name="默认更改列表" comment="" />
+    <list default="true" id="16834953-8e6a-470b-bcbd-85e9aabc88ae" name="默认更改列表" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/utils/crypto.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/utils/crypto.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/views/home/children/noteDetail.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/views/home/children/noteDetail.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/views/login/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/views/login/Login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/init.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/init.css" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="MERGE" />
+  </component>
   <component name="ProjectId" id="1ccF7QKGUlkYOh4zCdg31I6tEhh" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -15,15 +31,28 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="RunManager" selected="npm.dev">
     <configuration name="user.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/src/renderer/store/modules/user.js" working-dir="$PROJECT_DIR$/src/renderer/store/modules">
+      <method v="2" />
+    </configuration>
+    <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
       <method v="2" />
     </configuration>
     <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -39,10 +68,12 @@
     <list>
       <item itemvalue="Node.js.user.js" />
       <item itemvalue="npm.dev" />
+      <item itemvalue="npm.build" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="npm.dev" />
+        <item itemvalue="npm.build" />
         <item itemvalue="Node.js.user.js" />
       </list>
     </recent_temporary>
@@ -72,6 +103,7 @@
       <workItem from="1590819809524" duration="2391000" />
       <workItem from="1590824167752" duration="7000" />
       <workItem from="1590831532199" duration="82000" />
+      <workItem from="1606528405804" duration="13578000" />
     </task>
     <servers />
   </component>
@@ -79,25 +111,34 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590823000472">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state width="1419" height="128" key="GridCell.Tab.0.bottom" timestamp="1606550517522">
+      <screen x="0" y="23" width="1440" height="806" />
     </state>
-    <state x="184" y="112" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1590823000472" />
-    <state width="1419" height="199" key="GridCell.Tab.0.bottom" timestamp="1590831613978">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state width="1419" height="165" key="GridCell.Tab.0.bottom/0.23.1440.804@0.23.1440.804" timestamp="1606528458577" />
+    <state width="1419" height="128" key="GridCell.Tab.0.bottom/0.23.1440.806@0.23.1440.806" timestamp="1606550517522" />
+    <state width="1419" height="128" key="GridCell.Tab.0.center" timestamp="1606550517521">
+      <screen x="0" y="23" width="1440" height="806" />
     </state>
-    <state width="1419" height="199" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1590831613978" />
-    <state width="1419" height="199" key="GridCell.Tab.0.center" timestamp="1590831613977">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state width="1419" height="165" key="GridCell.Tab.0.center/0.23.1440.804@0.23.1440.804" timestamp="1606528458577" />
+    <state width="1419" height="128" key="GridCell.Tab.0.center/0.23.1440.806@0.23.1440.806" timestamp="1606550517521" />
+    <state width="1419" height="128" key="GridCell.Tab.0.left" timestamp="1606550517520">
+      <screen x="0" y="23" width="1440" height="806" />
     </state>
-    <state width="1419" height="199" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1590831613977" />
-    <state width="1419" height="199" key="GridCell.Tab.0.left" timestamp="1590831613974">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state width="1419" height="165" key="GridCell.Tab.0.left/0.23.1440.804@0.23.1440.804" timestamp="1606528458576" />
+    <state width="1419" height="128" key="GridCell.Tab.0.left/0.23.1440.806@0.23.1440.806" timestamp="1606550517520" />
+    <state width="1419" height="128" key="GridCell.Tab.0.right" timestamp="1606550517521">
+      <screen x="0" y="23" width="1440" height="806" />
     </state>
-    <state width="1419" height="199" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1590831613974" />
-    <state width="1419" height="199" key="GridCell.Tab.0.right" timestamp="1590831613977">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state width="1419" height="165" key="GridCell.Tab.0.right/0.23.1440.804@0.23.1440.804" timestamp="1606528458577" />
+    <state width="1419" height="128" key="GridCell.Tab.0.right/0.23.1440.806@0.23.1440.806" timestamp="1606550517521" />
+    <state x="221" y="62" key="SettingsEditor" timestamp="1606548662914">
+      <screen x="0" y="23" width="1440" height="806" />
     </state>
-    <state width="1419" height="199" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1590831613977" />
+    <state x="221" y="62" key="SettingsEditor/0.23.1440.804@0.23.1440.804" timestamp="1606528431384" />
+    <state x="221" y="62" key="SettingsEditor/0.23.1440.806@0.23.1440.806" timestamp="1606548662914" />
+    <state x="503" y="349" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606544483900">
+      <screen x="0" y="23" width="1440" height="806" />
+    </state>
+    <state x="503" y="349" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1440.806@0.23.1440.806" timestamp="1606544483900" />
   </component>
 </project>

@@ -1,5 +1,7 @@
 <template>
-  <div class="note-detail-component" @keyup.ctrl.83="handleUpdateNote">
+  <div
+    class="note-detail-component"
+    @keyup.ctrl.83="handleUpdateNote">
     <header class="title-section">
       <input
         placeholder="文章标题"
@@ -34,6 +36,7 @@
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex'
 import E from 'wangeditor' // eslint-disable-line
+import hljs from 'highlight.js'
 let editor = null
 export default {
   components: {},
@@ -130,6 +133,9 @@ export default {
     init () {
       let that = this
       editor = new E(this.$refs.editorElem)
+      // 挂载highlight插件
+      editor.highlight = hljs
+      editor.config.languageTab = '    '
       // 自定义配置颜色（字体颜色、背景色）
       editor.config.colors = [
         '#000000', '#e60000', '#ff9900', '#ffff00', '#008a00', '#0066cc', '#9933ff',
@@ -152,6 +158,10 @@ export default {
       editor.config.uploadImgMaxSize = 3 * 1024 * 1024
       // 限制一次最多上传 1 张图片
       editor.config.uploadImgMaxLength = 1
+      // 配置z-index
+      editor.config.zIndex = 500
+      // 配置行高
+      editor.config.lineHeights = ['1', '1.15', '1.6', '2', '2.5', '3']
       // 编辑器的事件，每次改变会获取其html内容
       editor.config.onchange = html => {
         this.editorContent = html
@@ -161,8 +171,9 @@ export default {
         'head', // 标题
         'bold', // 粗体
         'fontSize', // 字号
-        'fontName', // 字体
+        // 'fontName', // 字体
         'italic', // 斜体
+        'lineHeight', // 行高
         'underline', // 下划线
         'strikeThrough', // 删除线
         'foreColor', // 文字颜色
@@ -171,7 +182,7 @@ export default {
         'justify', // 对齐方式
         'link', // 插入链接
         'quote', // 引用
-        // 'emoticon', // 表情
+        'emoticon', // 表情
         'image', // 插入图片
         'table', // 表格
         'code', // 插入代码
@@ -387,23 +398,22 @@ export default {
       margin-left: 10px;
     }
   }
-  
+
+  /*调整富文本编辑器*/
+  h1 { font-size: 32px; }
+  h2 { font-size: 24px }
+  h3 { font-size: 18px }
+  h4 { font-size: 16px }
+  h5 { font-size: 14px }
+  h6 { font-size: 12px }
+  h7 { font-size: 10px }
   .w-e-toolbar {
     flex-wrap: wrap;
     border: none !important;
     border-bottom: 1px solid #ccc !important;
     background: none !important;
-    .w-e-menu:nth-child(1),
-    .w-e-menu:nth-child(3),
-    .w-e-menu:nth-child(7),
     .w-e-menu:nth-child(8),
-    .w-e-menu:nth-child(9),
-    .w-e-menu:nth-child(10),
-    .w-e-menu:nth-child(12) {
-      z-index: 2 !important;
-    }
-    .w-e-menu:nth-child(7),
-    .w-e-menu:nth-child(8) {
+    .w-e-menu:nth-child(9) {
       .w-e-droplist {
         width: 222px !important;
         .w-e-item {
@@ -426,7 +436,6 @@ export default {
     .w-e-active {
       i {
         color: #409EFF;
-        // color: #0a419b;
       }
     }
     .w-e-droplist {
@@ -435,7 +444,7 @@ export default {
     }
     .w-e-block {
       .w-e-item {
-        padding: none;
+        padding: 0;
       }
     }
   }
@@ -443,64 +452,51 @@ export default {
     width: calc(100%);
     height: calc(100vh - 55px - 38px) !important;
     border: none !important;
-    font-size: 16px;
-    color: #000;
+    word-break: break-all; // 英语换行问题
     z-index: 0 !important;
     .w-e-text pre {
-      width: calc(100vw - 220px - 240px - 25px - 14px) !important;
+      display: block;
+      width: calc(100vw - 220px - 240px - 25px) !important;
+      padding: 0;
+      font-size: 13px;
+      line-height: 1.5;
+      color: #333;
+      word-break: break-all;
+      word-wrap: break-word;
+      background-color: #f1f1f1;
+      border: 1px solid #ccc;
+      /*border-radius: 4px;*/
+      & > code {
+        width: 100%;
+        /*width: calc(100vw - 220px - 240px - 25px - 16px) !important;*/
+        padding: 0 3px;
+        margin: 0;
+        font-size: 14px;
+        color: inherit;
+        overflow: auto;
+      }
     }
     .w-e-text code {
-      width: calc(100vw - 220px - 240px - 25px - 14px) !important;
-      max-height: 340px;
-      padding: 5px;
-      border: 1px solid #dfdfdf;
-      margin: 0;
-      font-size: 14px;
-      overflow: auto;
-      border-radius: 0;
-      background: #f8f8f8;
+      padding: 3px 5px;
+      font-size: 90%;
+      color: #c7254e;
+      border-radius: 4px;
     }
     .w-e-text img {
       max-width: 500px;
     }
     .w-e-text blockquote {
-      margin: 5px 0;
-      border-left: 4px solid #dfdfdf;
+      border-width: 6px;
+      p {
+        padding: 0;
+        margin: 0;
+      }
     }
     ol li {
       list-style: decimal;
     }
     ul li {
       list-style: disc;
-    }
-    h1, h2, h3, h4, h5, h6, h7 {
-      font-weight: bold;
-    }
-    h1 { font-size: 32px; }
-    h2 { font-size: 24px }
-    h3 { font-size: 18px }
-    h4 { font-size: 16px }
-    h5 { font-size: 14px }
-    h6 { font-size: 12px }
-    h7 { font-size: 10px }
-    .w-e-text p,
-    .w-e-text h1,
-    .w-e-text h2,
-    .w-e-text h3,
-    .w-e-text h4,
-    .w-e-text h5,
-    .w-e-text table,
-    .w-e-text pre {
-      margin: 0;
-      margin-top: 5px;
-    }
-    .w-e-text p {
-      margin-top: 8px;
-    }
-    .w-e-panel-container {
-      li {
-        list-style: none;
-      }
     }
   }
   .w-e-text-container-window {

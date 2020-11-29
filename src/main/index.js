@@ -37,7 +37,10 @@ function createWindow () {
     minHeight: 700,
     frame: isMac,
     resizable: true,
-    webPreferences: { webSecurity: false } // 允许跨域访问
+    webPreferences: {
+      // nodeIntegration: true, // 在网页中集成Node
+      webSecurity: false // 允许跨域访问
+    }
   })
 
   // 解决electron网页缩放问题 start

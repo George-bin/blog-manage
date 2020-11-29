@@ -73,7 +73,6 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-import { aesEncrypt, aesDecrypt } from '../../utils/crypto'
 import { validatorSpace } from '@/utils/script/validatorData'
 import { ipcRenderer } from 'electron'
 
@@ -122,7 +121,7 @@ export default {
       if (list && list.length > 0) {
         this.formData = {
           account: list[0].account,
-          password: aesDecrypt({ encrypted: list[0].password })
+          password: list[0].password
         }
         this.accountList = JSON.parse(JSON.stringify(list))
       }
@@ -136,7 +135,7 @@ export default {
     handleClickLogin () {
       this.loading = true
       let data = JSON.parse(JSON.stringify(this.formData))
-      data.password = this.$md5(data.password)
+      // data.password = this.$md5(data.password)
       this.Login(data)
         .then(res => {
           let { errcode, message } = res
@@ -181,19 +180,19 @@ export default {
           list.splice(index, 1)
           list.unshift({
             account: this.formData.account,
-            password: aesEncrypt({ data: this.formData.password })
+            password: this.formData.password
           })
         } else {
           list.unshift({
             account: this.formData.account,
-            password: aesEncrypt({ data: this.formData.password })
+            password: this.formData.password
           })
         }
       } else {
         list = []
         list.push({
           account: this.formData.account,
-          password: aesEncrypt({ data: this.formData.password })
+          password: this.formData.password
         })
       }
       localStorage.setItem('accountList', JSON.stringify(list))
@@ -203,7 +202,7 @@ export default {
     useAccount (event) {
       this.accountListVisible = false
       this.formData.account = event.account
-      this.formData.password = aesDecrypt({ encrypted: event.password })
+      this.formData.password = event.password
     },
 
     // 删除本地缓存中的账户
@@ -218,7 +217,7 @@ export default {
       if (this.formData.account === account.account) {
         if (list && list.length > 1) {
           this.formData.account = list[0].account
-          this.formData.password = aesDecrypt({ encrypted: list[0].password })
+          this.formData.password = list[0].password
         } else {
           this.formData.account = ''
           this.formData.password = ''

@@ -134,9 +134,6 @@ export default {
 
 <style lang="scss">
 /* CSS */
-* {
-  font-family: "Microsoft YaHei", "Arial", "黑体", "宋体", sans-serif;
-}
 body,
 html {
   height: 100%;
